@@ -1,7 +1,5 @@
 # 🍽️ Food Calories Calculator — 食物热量计算器
 
-> **模型声明**：本项目由 **Claude Sonnet 4** 开发。
-
 一个通过拍摄食物照片智能识别食物并估算热量的 Web 应用。
 
 ## ✨ 功能特性
