@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物热量计算器 — Food Calories Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍽️ 食物热量计算器</h1>
+            <p class="subtitle">Food Calories Calculator</p>
+            <p class="description">拍摄食物照片，智能识别食物并估算热量</p>
+        </header>
+
+        <!-- Model Selection -->
+        <section class="card">
+            <h2>⚙️ 模型选择</h2>
+            <div class="model-selector">
+                <label>
+                    <input type="radio" name="model" value="openrouter" checked>
+                    <span>OpenRouter 多模态模型</span>
+                    <small>使用 Qwen2.5-VL 等云端模型（需要API Key）</small>
+                </label>
+                <label>
+                    <input type="radio" name="model" value="local">
+                    <span>本地训练模型</span>
+                    <small>使用自己训练的模型（演示模式）</small>
+                </label>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab active" data-tab="single">📸 单张照片识别</button>
+            <button class="tab" data-tab="compare">📷📷 饭前饭后对比</button>
+        </div>
+
+        <!-- Single Photo Tab -->
+        <section id="tab-single" class="tab-content active">
+            <div class="card">
+                <h2>上传食物照片</h2>
+                <div class="upload-area" id="single-upload-area">
+                    <div class="upload-placeholder" id="single-placeholder">
+                        <span class="upload-icon">📷</span>
+                        <p>点击或拖拽上传食物照片</p>
+                        <p class="hint">支持 JPG、PNG 格式</p>
+                    </div>
+                    <img id="single-preview" class="preview-img hidden" alt="预览">
+                    <input type="file" id="single-file" accept="image/*" capture="environment" hidden>
+                </div>
+                <button class="btn btn-primary" id="btn-recognize" disabled>
+                    🔍 识别食物热量
+                </button>
+            </div>
+        </section>
+
+        <!-- Comparison Tab -->
+        <section id="tab-compare" class="tab-content">
+            <div class="card">
+                <h2>上传饭前照片</h2>
+                <div class="upload-area" id="before-upload-area">
+                    <div class="upload-placeholder" id="before-placeholder">
+                        <span class="upload-icon">🍽️</span>
+                        <p>饭前 — 上传开始用餐前的照片</p>
+                        <p class="hint">支持 JPG、PNG 格式</p>
+                    </div>
+                    <img id="before-preview" class="preview-img hidden" alt="饭前预览">
+                    <input type="file" id="before-file" accept="image/*" capture="environment" hidden>
+                </div>
+            </div>
+            <div class="card">
+                <h2>上传饭后照片</h2>
+                <div class="upload-area" id="after-upload-area">
+                    <div class="upload-placeholder" id="after-placeholder">
+                        <span class="upload-icon">🥢</span>
+                        <p>饭后 — 上传用餐结束后的照片</p>
+                        <p class="hint">支持 JPG、PNG 格式</p>
+                    </div>
+                    <img id="after-preview" class="preview-img hidden" alt="饭后预览">
+                    <input type="file" id="after-file" accept="image/*" capture="environment" hidden>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="btn-compare" disabled>
+                🔍 对比计算实际摄入
+            </button>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>正在分析食物照片，请稍候...</p>
+        </div>
+
+        <!-- Results -->
+        <section id="results" class="card hidden">
+            <h2>📊 识别结果</h2>
+            <div id="results-content"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Food Calories Calculator &copy; 2025 &mdash; 模型: Claude Sonnet 4</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
